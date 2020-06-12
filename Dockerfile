@@ -17,7 +17,7 @@ FROM openjdk:8-jre-slim
 LABEL version="gsi"
 LABEL maintainer="Dania Rojas<dania.rojas@generalsoftwareinc.com>"
 
-ENV EUREKA_HOME=/opt/eureka
+ENV EUREKA_HOME=/opt/eureka/
 
 RUN useradd -lrmU dataries
 
