@@ -1,6 +1,6 @@
 # Description
 
-This image was created with the intention of achieving an easier deployment of Eureka Server component on Docker. We are not associated with Netflix OSS in anyway. You can find the official docker image [here](https://hub.docker.com/r/netflixoss/eureka).
+This image was created with the intention of achieving an easier deployment of Eureka Server component on Docker. We are not associated with Netflix OSS in anyway.
 
 # Quick reference
 
@@ -9,7 +9,7 @@ This image was created with the intention of achieving an easier deployment of E
 
 # What is Eureka?
 
-The Eureka Server is a Netflix OSS product, and Spring Cloud offers a declarative way to register and invoke services by Java annotation. This is a REST (Representational State Transfer) based service that is primarily used in the AWS cloud for locating services for the purpose of load balancing and failover of middle-tier servers.
+The Eureka Server is a Netflix OSS product, and Spring Cloud offers a declarative way to use it to register and invoke services by Java annotation. This is a REST (Representational State Transfer) based service that is primarily used in the AWS cloud for locating services for the purpose of load balancing and failover of middle-tier servers.
 
 # How to use this image
 
@@ -19,14 +19,11 @@ The Eureka Server is a Netflix OSS product, and Spring Cloud offers a declarativ
 docker run -itd --name eureka -p 8761:8761 --restart on-failure gsiopen/eureka:1.0.0
 ~~~
 
-## Persist data
-
-> This image is runned using a non root user `dataries` who owns the `/opt/eureka` folder.
-
-By default, eureka's data and datalog are stored in...
 
 
 ## Connect to Eureka from the command line client
+
+> This image is runned using a non root user `dataries` who owns the `/opt/eureka` folder.
 
 ~~~bash
 docker exec -it eureka bash
@@ -34,12 +31,11 @@ docker exec -it eureka bash
 
 ## Check logs
 
-By default, Eureka redirects stdout/stderr outputs to the console so you can run the next command to find logs:
+By default, Eureka redirects stdout/stderr outputs to the console, so you can run the next command to find logs:
 
 ~~~bash
 docker logs eureka
 ~~~
-
 
 # Deploy a cluster
 
@@ -95,6 +91,23 @@ mvn spring-boot:run -Dspring-boot.run.profiles=peer3
 
 # Configuration
 
-## Volumes
-
 ## Environment variables
+
+The environment configuration is controlled via the following environment variable groups or PREFIX:
+
+    EUREKA_INSTANCE_PREFER_IP_ADDRESS: affects application-prod.yml
+    EUREKA_INSTANCE_HOSTNAME: affects application-prod.yml
+    SERVER_PORT: affects application-prod.yml
+    
+Set environment variables with the appropriated group in the form PREFIX_PROPERTY.
+
+Due to restriction imposed by docker and docker-compose on environment variable names the following substitution are applied to PROPERTY names:
+
+    _ => .
+    __ => _
+    ___ => -
+
+Following are some illustratory examples:
+
+     SERVER_PORT=8761: sets the server.port property in application-prod.yml
+     EUREKA_INSTANCE_PREFER_IP_ADDRESS=true: sets the eureka.instance.preferIpAddress property in application-prod.yml
