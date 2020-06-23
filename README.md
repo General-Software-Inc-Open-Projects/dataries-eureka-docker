@@ -1,6 +1,6 @@
 # Description
 
-This image was created with the intention of achieving an easier deployment of Eureka Server component on Docker. We are not associated with Netflix OSS in anyway.
+This image was created with the intention of achieving an easier deployment of Eureka Server component on Docker, to see the image, in Docker Hub, follow this [link](https://hub.docker.com/repository/docker/gsiopen/eureka). We are not associated with Netflix OSS in anyway.
 
 # Quick reference
 
@@ -18,8 +18,6 @@ The Eureka Server is a Netflix OSS product, and Spring Cloud offers a declarativ
 ~~~bash
 docker run -itd --name eureka -p 8761:8761 --restart on-failure gsiopen/eureka:1.0.0
 ~~~
-
-
 
 ## Connect to Eureka from the command line client
 
